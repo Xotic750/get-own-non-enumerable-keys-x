@@ -23,7 +23,7 @@
 ## get-own-non-enumerable-keys-x
 Like Reflect.ownKeys but gets only non-enumerable properties.
 
-**Version**: 1.0.0  
+**Version**: 1.1.0  
 **Author**: Xotic750 <Xotic750@gmail.com>  
 **License**: [MIT](&lt;https://opensource.org/licenses/MIT&gt;)  
 **Copyright**: Xotic750  

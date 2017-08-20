@@ -24,6 +24,14 @@ if (typeof module === 'object' && module.exports) {
 var hasSymbolSupport = typeof Symbol === 'function' && typeof Symbol('') === 'symbol';
 var ifSymbolsIt = hasSymbolSupport ? it : xit;
 
+var testObj = {};
+Object.defineProperty(testObj, '1', {
+  value: 'first'
+});
+
+var definedsNonEnumerable = Object.keys(testObj).length === 0;
+var ifDefinesNonEnumerable = definedsNonEnumerable ? it : xit;
+
 describe('getOwnNonEnumerableKeys', function () {
   it('is a function', function () {
     expect(typeof getOwnNonEnumerableKeys).toBe('function');
@@ -55,7 +63,12 @@ describe('getOwnNonEnumerableKeys', function () {
     }).toThrow();
   });
 
-  it('should return non-enumerable own keys', function () {
+  it('should return empty array', function () {
+    var obj = { bar: 1, foo: 2 };
+    expect(getOwnNonEnumerableKeys(obj)).toEqual([]);
+  });
+
+  ifDefinesNonEnumerable('should return non-enumerable own keys', function () {
     var obj = { bar: 1, foo: 2 };
     Object.defineProperty(obj, '1', {
       value: 'first'
@@ -67,7 +80,7 @@ describe('getOwnNonEnumerableKeys', function () {
       return keys.includes(ownKey) === false;
     });
 
-    expect(getOwnNonEnumerableKeys(obj).sort()).toEqual(result.sort());
+    expect(getOwnNonEnumerableKeys(obj)).toEqual(result);
   });
 
   ifSymbolsIt('should return non-enumerable own keys including symbols', function () {
@@ -83,6 +96,6 @@ describe('getOwnNonEnumerableKeys', function () {
       return keys.includes(ownKey) === false;
     });
 
-    expect(getOwnNonEnumerableKeys(obj).sort()).toEqual(result.sort());
+    expect(getOwnNonEnumerableKeys(obj)).toEqual(result);
   });
 });
