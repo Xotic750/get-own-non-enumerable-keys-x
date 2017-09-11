@@ -1,6 +1,6 @@
 /**
  * @file Like Reflect.ownKeys but gets only non-enumerable properties.
- * @version 2.0.0
+ * @version 2.1.0
  * @author Xotic750 <Xotic750@gmail.com>
  * @copyright  Xotic750
  * @license {@link <https://opensource.org/licenses/MIT> MIT}
@@ -10,9 +10,9 @@
 'use strict';
 
 var toObject = require('to-object-x');
-var objectKeys = require('object-keys-x');
+var filter = require('array-filter-x');
 var reflectOwnKeys = require('reflect-own-keys-x');
-var difference = require('array-difference-x');
+var propertyIsEnumerable = require('property-is-enumerable-x');
 
 /**
  * This method returns only the non-enumerable own keys of an object.
@@ -39,5 +39,7 @@ var difference = require('array-difference-x');
  */
 module.exports = function getOwnNonEnumerableKeys(target) {
   var object = toObject(target);
-  return difference(reflectOwnKeys(object), objectKeys(object));
+  return filter(reflectOwnKeys(object), function (key) {
+    return propertyIsEnumerable(object, key) === false;
+  });
 };
