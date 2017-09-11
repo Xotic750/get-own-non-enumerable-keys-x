@@ -72,8 +72,7 @@ describe('getOwnNonEnumerableKeys', function () {
     var expected = objects.map(function (object) {
       var obj = Object(object);
       var keys = Object.keys(obj);
-      var ownKeys = Reflect.ownKeys(obj);
-      return ownKeys.filter(function _filter(ownKey) {
+      return Reflect.ownKeys(obj).filter(function (ownKey) {
         return keys.includes(ownKey) === false;
       });
     });
@@ -83,15 +82,27 @@ describe('getOwnNonEnumerableKeys', function () {
     expect(actual).toEqual(expected);
   });
 
-  ifSymbolsIt('should return non-enumerable own keys including symbols', function () {
-    var obj = Object.defineProperty({ bar: 1, foo: 2 }, Symbol('first'), {
+  ifSymbolsIt('should return non-enumerable own keys and symbols', function () {
+    var s1 = Symbol('first');
+    var obj = Object.defineProperty({ bar: 1, foo: 2 }, s1, {
+      enumerable: true,
       value: 'first'
     });
 
+    var s2 = Symbol('second');
+    Object.defineProperty(obj, s2, {
+      enumerable: false,
+      value: 'second'
+    });
+
     var keys = Object.keys(obj);
-    var ownKeys = Reflect.ownKeys(obj);
-    var result = ownKeys.filter(function _filter(ownKey) {
-      return keys.includes(ownKey) === false;
+    var syms = Object.getOwnPropertySymbols(obj).filter(function (sym) {
+      // eslint-disable-next-line no-prototype-builtins
+      return obj.propertyIsEnumerable(sym);
+    });
+
+    var result = Reflect.ownKeys(obj).filter(function (ownKey) {
+      return keys.includes(ownKey) === false && syms.includes(ownKey) === false;
     });
 
     expect(getOwnNonEnumerableKeys(obj)).toEqual(result);
