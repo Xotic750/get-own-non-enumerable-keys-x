@@ -37,7 +37,7 @@ describe('getOwnNonEnumerableKeys', function () {
     expect(typeof getOwnNonEnumerableKeys).toBe('function');
   });
 
-  it('should throw when target is not an object', function () {
+  it('should throw when target is null or undefined', function () {
     expect(function () {
       getOwnNonEnumerableKeys();
     }).toThrow();
@@ -49,44 +49,42 @@ describe('getOwnNonEnumerableKeys', function () {
     expect(function () {
       getOwnNonEnumerableKeys(null);
     }).toThrow();
-
-    expect(function () {
-      getOwnNonEnumerableKeys(1);
-    }).toThrow();
-
-    expect(function () {
-      getOwnNonEnumerableKeys(true);
-    }).toThrow();
-
-    expect(function () {
-      getOwnNonEnumerableKeys('');
-    }).toThrow();
   });
 
   it('should return empty array', function () {
-    var obj = { bar: 1, foo: 2 };
-    expect(getOwnNonEnumerableKeys(obj)).toEqual([]);
+    expect(getOwnNonEnumerableKeys({ bar: 1, foo: 2 })).toEqual([]);
   });
 
   ifDefinesNonEnumerable('should return non-enumerable own keys', function () {
-    var obj = { bar: 1, foo: 2 };
-    Object.defineProperty(obj, '1', {
-      value: 'first'
+    var objects = [
+      1,
+      true,
+      'abc',
+      [],
+      Object.defineProperty({ bar: 1, foo: 2 }, 'x', {
+        value: 'first'
+      }),
+      /ab/,
+      new Date(),
+      function () {}
+    ];
+
+    var expected = objects.map(function (object) {
+      var obj = Object(object);
+      var keys = Object.keys(obj);
+      var ownKeys = Reflect.ownKeys(obj);
+      return ownKeys.filter(function _filter(ownKey) {
+        return keys.includes(ownKey) === false;
+      });
     });
 
-    var keys = Object.keys(obj);
-    var ownKeys = Reflect.ownKeys(obj);
-    var result = ownKeys.filter(function _filter(ownKey) {
-      return keys.includes(ownKey) === false;
-    });
+    var actual = objects.map(getOwnNonEnumerableKeys);
 
-    expect(getOwnNonEnumerableKeys(obj)).toEqual(result);
+    expect(actual).toEqual(expected);
   });
 
   ifSymbolsIt('should return non-enumerable own keys including symbols', function () {
-    var obj = { bar: 1, foo: 2 };
-    var symbol = Symbol('first');
-    Object.defineProperty(obj, symbol, {
+    var obj = Object.defineProperty({ bar: 1, foo: 2 }, Symbol('first'), {
       value: 'first'
     });
 

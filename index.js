@@ -1,6 +1,6 @@
 /**
  * @file Like Reflect.ownKeys but gets only non-enumerable properties.
- * @version 1.2.0
+ * @version 2.0.0
  * @author Xotic750 <Xotic750@gmail.com>
  * @copyright  Xotic750
  * @license {@link <https://opensource.org/licenses/MIT> MIT}
@@ -9,20 +9,10 @@
 
 'use strict';
 
-var assertIsObject = require('assert-is-object-x');
+var toObject = require('to-object-x');
 var objectKeys = require('object-keys-x');
 var reflectOwnKeys = require('reflect-own-keys-x');
-var filter = require('array-filter-x');
-var includes = require('array-includes-x');
-
-var getONEK = function getOwnNonEnumerableKeys(target) {
-  assertIsObject(target);
-  var keys = objectKeys(target);
-  var ownKeys = reflectOwnKeys(target);
-  return filter(ownKeys, function _filter(ownKey) {
-    return includes(keys, ownKey) === false;
-  });
-};
+var difference = require('array-difference-x');
 
 /**
  * This method returns only the non-enumerable own keys of an object.
@@ -30,7 +20,7 @@ var getONEK = function getOwnNonEnumerableKeys(target) {
  * environments and therefore an empty array will be returned.
  *
  * @param {Object} target - The target.
- * @throws {typeError} - If target is a primitive.
+ * @throws {typeError} - If target is null or undefined.
  * @returns {Array} The non-enumerable own keys.
  * @example
  * var getOwnNonEnumerableKeys = require('get-own-non-enumerable-keys-x');
@@ -47,4 +37,7 @@ var getONEK = function getOwnNonEnumerableKeys(target) {
  *
  * getOwnNonEnumerableKeys(obj); // ['1', symbol]
  */
-module.exports = getONEK;
+module.exports = function getOwnNonEnumerableKeys(target) {
+  var object = toObject(target);
+  return difference(reflectOwnKeys(object), objectKeys(object));
+};
