@@ -1,6 +1,6 @@
 {
   "name": "get-own-non-enumerable-keys-x",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Like Reflect.ownKeys but gets only non-enumerable properties.",
   "homepage": "https://github.com/Xotic750/get-own-non-enumerable-keys-x",
   "author": {
@@ -33,7 +33,7 @@
   "dependencies": {
     "array-filter-x": "^2.2.0",
     "property-is-enumerable-x": "^1.1.0",
-    "reflect-own-keys-x": "^1.5.0",
+    "reflect-own-keys-x": "^2.0.0",
     "to-object-x": "^1.4.1"
   },
   "devDependencies": {
