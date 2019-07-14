@@ -7,21 +7,19 @@
  * @module get-own-non-enumerable-keys-x
  */
 
-'use strict';
-
-var toObject = require('to-object-x');
-var filter = require('array-filter-x');
-var reflectOwnKeys = require('reflect-own-keys-x');
-var arrayIncludes = require('array-includes-x');
-var objectKeys = require('object-keys-x');
-var getOEPS = require('get-own-enumerable-property-symbols-x');
+const toObject = require('to-object-x');
+const filter = require('array-filter-x');
+const reflectOwnKeys = require('reflect-own-keys-x');
+const arrayIncludes = require('array-includes-x');
+const objectKeys = require('object-keys-x');
+const getOEPS = require('get-own-enumerable-property-symbols-x');
 
 /**
  * This method returns only the non-enumerable own keys of an object.
  * Note: It is not possible the get a list of non-enumerable own keys in older
  * environments and therefore an empty array will be returned.
  *
- * @param {Object} target - The target.
+ * @param {object} target - The target.
  * @throws {typeError} - If target is null or undefined.
  * @returns {Array} The non-enumerable own keys.
  * @example
@@ -40,10 +38,11 @@ var getOEPS = require('get-own-enumerable-property-symbols-x');
  * getOwnNonEnumerableKeys(obj); // ['1', symbol]
  */
 module.exports = function getOwnNonEnumerableKeys(target) {
-  var object = toObject(target);
-  var enumKeys = objectKeys(object);
-  var enumSyms = getOEPS(object);
-  return filter(reflectOwnKeys(object), function (key) {
+  const object = toObject(target);
+  const enumKeys = objectKeys(object);
+  const enumSyms = getOEPS(object);
+
+  return filter(reflectOwnKeys(object), function(key) {
     return arrayIncludes(enumKeys, key) === false && arrayIncludes(enumSyms, key) === false;
   });
 };
