@@ -53,7 +53,7 @@
   "dependencies": {
     "array-filter-x": "^3.0.1",
     "array-includes-x": "^2.0.0",
-    "get-own-enumerable-property-symbols-x": "^1.0.0",
+    "get-own-enumerable-property-symbols-x": "^2.0.0",
     "object-keys-x": "^2.5.0",
     "reflect-own-keys-x": "^2.2.0",
     "to-object-x": "^2.0.1"
