@@ -7,12 +7,13 @@
  * @module get-own-non-enumerable-keys-x
  */
 
-const toObject = require('to-object-x');
-const filter = require('array-filter-x');
-const reflectOwnKeys = require('reflect-own-keys-x');
-const arrayIncludes = require('array-includes-x');
-const objectKeys = require('object-keys-x');
-const getOEPS = require('get-own-enumerable-property-symbols-x');
+import toObject from 'to-object-x';
+
+import filter from 'array-filter-x';
+import reflectOwnKeys from 'reflect-own-keys-x';
+import arrayIncludes from 'array-includes-x';
+import objectKeys from 'object-keys-x';
+import getOEPS from 'get-own-enumerable-property-symbols-x';
 
 /**
  * This method returns only the non-enumerable own keys of an object.
@@ -37,7 +38,7 @@ const getOEPS = require('get-own-enumerable-property-symbols-x');
  *
  * getOwnNonEnumerableKeys(obj); // ['1', symbol]
  */
-module.exports = function getOwnNonEnumerableKeys(target) {
+export default function getOwnNonEnumerableKeys(target) {
   const object = toObject(target);
   const enumKeys = objectKeys(object);
   const enumSyms = getOEPS(object);
@@ -45,4 +46,4 @@ module.exports = function getOwnNonEnumerableKeys(target) {
   return filter(reflectOwnKeys(object), function(key) {
     return arrayIncludes(enumKeys, key) === false && arrayIncludes(enumSyms, key) === false;
   });
-};
+}

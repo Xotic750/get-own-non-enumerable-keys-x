@@ -36,24 +36,27 @@ const ifDefinesNonEnumerable = definedsNonEnumerable ? it : xit;
 
 describe('getOwnNonEnumerableKeys', function() {
   it('is a function', function() {
+    expect.assertions(1);
     expect(typeof getOwnNonEnumerableKeys).toBe('function');
   });
 
   it('should throw when target is null or undefined', function() {
+    expect.assertions(1);
     expect(function() {
       getOwnNonEnumerableKeys();
-    }).toThrow();
+    }).toThrowErrorMatchingSnapshot();
 
     expect(function() {
       getOwnNonEnumerableKeys(void 0);
-    }).toThrow();
+    }).toThrowErrorMatchingSnapshot();
 
     expect(function() {
       getOwnNonEnumerableKeys(null);
-    }).toThrow();
+    }).toThrowErrorMatchingSnapshot();
   });
 
   it('should return empty array', function() {
+    expect.assertions(1);
     expect(getOwnNonEnumerableKeys({bar: 1, foo: 2})).toStrictEqual([]);
   });
 
