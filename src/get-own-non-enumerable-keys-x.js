@@ -15,7 +15,7 @@ import getOEPS from 'get-own-enumerable-property-symbols-x';
  * @throws {typeError} - If target is null or undefined.
  * @returns {Array} The non-enumerable own keys.
  */
-export default function getOwnNonEnumerableKeys(target) {
+const getOwnNonEnumerableKeys = function getOwnNonEnumerableKeys(target) {
   const object = toObject(target);
   const enumKeys = objectKeys(object);
   const enumSyms = getOEPS(object);
@@ -23,4 +23,6 @@ export default function getOwnNonEnumerableKeys(target) {
   return filter(reflectOwnKeys(object), function(key) {
     return arrayIncludes(enumKeys, key) === false && arrayIncludes(enumSyms, key) === false;
   });
-}
+};
+
+export default getOwnNonEnumerableKeys;
