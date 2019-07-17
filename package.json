@@ -55,7 +55,7 @@
     "array-includes-x": "^3.0.5",
     "get-own-enumerable-property-symbols-x": "^2.0.6",
     "object-keys-x": "^3.0.6",
-    "reflect-own-keys-x": "^2.2.0",
+    "reflect-own-keys-x": "^3.0.0",
     "to-object-x": "^2.0.7"
   },
   "devDependencies": {
