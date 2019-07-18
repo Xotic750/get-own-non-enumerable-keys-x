@@ -1,4 +1,4 @@
-let getOwnNonEnumerableKeys;
+import getOwnNonEnumerableKeys from '../src/get-own-non-enumerable-keys-x';
 
 const hasSymbolSupport = typeof Symbol === 'function' && typeof Symbol('') === 'symbol';
 const ifSymbolsIt = hasSymbolSupport ? it : xit;
@@ -18,7 +18,7 @@ describe('getOwnNonEnumerableKeys', function() {
   });
 
   it('should throw when target is null or undefined', function() {
-    expect.assertions(1);
+    expect.assertions(3);
     expect(function() {
       getOwnNonEnumerableKeys();
     }).toThrowErrorMatchingSnapshot();

@@ -21,15 +21,13 @@
 <a name="module_get-own-non-enumerable-keys-x"></a>
 
 ## get-own-non-enumerable-keys-x
+
 Like Reflect.ownKeys but gets only non-enumerable properties.
 
-**Version**: 3.2.0  
-**Author**: Xotic750 <Xotic750@gmail.com>  
-**License**: [MIT](&lt;https://opensource.org/licenses/MIT&gt;)  
-**Copyright**: Xotic750  
-<a name="exp_module_get-own-non-enumerable-keys-x--module.exports"></a>
+wn-non-enumerable-keys-x--module.exports"></a>
 
 ### `module.exports(target)` ⇒ <code>Array</code> ⏏
+
 This method returns only the non-enumerable own keys of an object.
 Note: It is not possible the get a list of non-enumerable own keys in older
 environments and therefore an empty array will be returned.
@@ -40,23 +38,23 @@ environments and therefore an empty array will be returned.
 
 - <code>typeError</code> - If target is null or undefined.
 
-
-| Param | Type | Description |
-| --- | --- | --- |
+| Param  | Type                | Description |
+| ------ | ------------------- | ----------- |
 | target | <code>Object</code> | The target. |
 
-**Example**  
-```js
-var getOwnNonEnumerableKeys = require('get-own-non-enumerable-keys-x');
+**Example**
 
-var obj = { bar: 1, foo: 2 };
+```js
+import getOwnNonEnumerableKeys from 'get-own-non-enumerable-keys-x';
+
+const obj = {bar: 1, foo: 2};
 Object.defineProperty(obj, '1', {
-  value: 'first'
+  value: 'first',
 });
 
-var symbol = Symbol('first');
+const symbol = Symbol('first');
 Object.defineProperty(obj, symbol, {
-  value: 'second'
+  value: 'second',
 });
 
 getOwnNonEnumerableKeys(obj); // ['1', symbol]
