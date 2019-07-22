@@ -2,13 +2,13 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2017",
-  "date": "2019-07-21T23:30:50.672Z",
+  "date": "2019-07-22T13:32:02.990Z",
   "describe": "",
   "description": "Like Reflect.ownKeys but gets only non-enumerable properties.",
   "file": "get-own-non-enumerable-keys-x.js",
   "hash": "215de2a2fcf1e71fd2b3",
   "license": "MIT",
-  "version": "4.0.3"
+  "version": "4.0.4"
 }
 */
 (function webpackUniversalModuleDefinition(root, factory) {
