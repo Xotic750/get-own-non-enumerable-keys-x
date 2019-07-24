@@ -1,6 +1,6 @@
 {
   "name": "get-own-non-enumerable-keys-x",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "description": "Like Reflect.ownKeys but gets only non-enumerable properties.",
   "homepage": "https://github.com/Xotic750/get-own-non-enumerable-keys-x",
   "author": {
@@ -24,6 +24,7 @@
   ],
   "module": "dist/get-own-non-enumerable-keys-x.esm.js",
   "main": "dist/get-own-non-enumerable-keys-x.js",
+  "jsdelivr": "dist/get-own-non-enumerable-keys-x.min.js",
   "scripts": {
     "build:esm": "mkdirp dist && babel -s true --env-name esm src/get-own-non-enumerable-keys-x.js -o dist/get-own-non-enumerable-keys-x.esm.js",
     "build:base": "webpack --bail --progress --profile --colors",
@@ -51,12 +52,12 @@
     "url": "https://github.com/Xotic750/get-own-non-enumerable-keys-x/issues"
   },
   "dependencies": {
-    "array-filter-x": "^3.0.14",
-    "array-includes-x": "^3.0.11",
-    "get-own-enumerable-property-symbols-x": "^2.0.12",
-    "object-keys-x": "^3.0.12",
-    "reflect-own-keys-x": "^3.0.6",
-    "to-object-x": "^2.0.14"
+    "array-filter-x": "^3.0.15",
+    "array-includes-x": "^3.0.12",
+    "get-own-enumerable-property-symbols-x": "^2.0.13",
+    "object-keys-x": "^3.0.13",
+    "reflect-own-keys-x": "^3.0.7",
+    "to-object-x": "^2.0.16"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -94,7 +95,7 @@
     "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.13.6",
-    "eslint-plugin-jsdoc": "^15.7.1",
+    "eslint-plugin-jsdoc": "^15.7.2",
     "eslint-plugin-json": "^1.4.0",
     "eslint-plugin-lodash": "^5.1.0",
     "eslint-plugin-no-use-extend-native": "^0.4.1",
