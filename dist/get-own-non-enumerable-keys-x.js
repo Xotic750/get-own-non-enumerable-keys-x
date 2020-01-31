@@ -2,7 +2,7 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2017",
-  "date": "2019-09-05T20:37:05.980Z",
+  "date": "2020-01-31T10:54:16.487Z",
   "describe": "",
   "description": "Like Reflect.ownKeys but gets only non-enumerable properties.",
   "file": "get-own-non-enumerable-keys-x.js",
